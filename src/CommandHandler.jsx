@@ -41,19 +41,37 @@ const fileSystem = {
     ]
 };
 let currentDir = fileSystem;
-let path = "/home";  // Initialize with the root path
+let dirStack = [];  // Initialize a stack to keep track of directory navigation
 
-function cd(folderName) {
-    const target = currentDir.children.find(child => child.name === folderName && child.type === 'folder');
-    if (target) {
-        currentDir = target;
-        path += '/' + folderName;  // Update the path
+
+function cd(folderName, setPath) {
+    if (folderName === '..') {
+        // Navigate to the parent directory if it exists
+        if (dirStack.length > 0) {
+            currentDir = dirStack.pop();
+            // Update the path to remove the last segment
+            setPath(prevPath => {
+                const segments = prevPath.split('/');
+                segments.pop();
+                return segments.join('/');
+            });
+        } else {
+            return 'Already at the root directory';
+        }
     } else {
-        return 'No such directory';
+        const target = currentDir.children.find(child => child.name === folderName && child.type === 'folder');
+        if (target) {
+            dirStack.push(currentDir);  // Push the current directory to the stack
+            currentDir = target;
+            // Update the path
+            setPath(prevPath => prevPath + '/' + folderName);
+        } else {
+            return 'No such directory';
+        }
     }
 }
 
-function pwd() {
+function pwd(path) {
     return path;  // Return the current path
 }
 
@@ -87,14 +105,14 @@ function help() {
         '\n 5. open {index.html} : open a new page of index.html';
 }
 
-function CommandHandler(command) {
+function CommandHandler(command, setPath, path, setOutput) {
     const [cmd, arg] = command.split(' ');
 
     switch (cmd) {
         case 'help':
             return help();
         case 'cd':
-            return cd(arg);
+            return cd(arg, setPath); // Pass setPath
         case 'ls':
             return ls();
         case 'cat':
@@ -102,7 +120,11 @@ function CommandHandler(command) {
         case 'open':
             return open(arg);
         case 'pwd':
-            return pwd();  // Handle the pwd command
+            return pwd(path);  // Handle the pwd command
+        case 'clear':
+            setOutput([]);  // Clear the output array
+            return '';  // Return an empty string or null to avoid adding to output
+
         default:
             return 'Invalid command: ' + command + '\nType help for guidelines.';
     }

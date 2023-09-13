@@ -8,6 +8,7 @@ export const useAppContext = () => {
 
 export const AppProvider = ({ children }) => {
     const [input, setInput] = useState('');
+    const [path, setPath] = useState('/home');
 
     const handleMenuClick = (menuItem) => {
         setInput(menuItem.toLowerCase());
@@ -17,6 +18,8 @@ export const AppProvider = ({ children }) => {
         input,
         setInput,
         handleMenuClick,
+        path,
+        setPath
     };
 
     return (

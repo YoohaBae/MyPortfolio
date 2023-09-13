@@ -4,7 +4,7 @@ import commandHandler from "./CommandHandler.jsx";
 import { useAppContext } from './AppContext';  // Import the custom hook from AppContext
 
 function App() {
-    const { input, setInput } = useAppContext();  // Use the context
+    const { input, setInput, _, path, setPath } = useAppContext();  // Use the context
     const [output, setOutput] = useState([]);
     const [showPrompt, setShowPrompt] = useState(false);
     const [loadingPercent] = useState(0);
@@ -52,8 +52,10 @@ function App() {
 
 
     const handleCommand = (command) => {
-        var oneOutput = commandHandler(command);
-        setOutput([...output, { type: 'text', content: oneOutput }]);
+        var oneOutput = commandHandler(command, setPath, path, setOutput); // Pass setPath
+        if (oneOutput !== '') {  // Avoid adding empty lines to the output
+            setOutput([...output, { type: 'text', content: oneOutput }]);
+        }
     };
 
     const handleSubmit = (e) => {
@@ -78,7 +80,7 @@ function App() {
                         <div className={"text"}>
 
                         <form onSubmit={handleSubmit}>
-                            <span>visitor@mynameblog  /home %&nbsp;</span>
+                            <span>visitor@mynameblog  {path} %&nbsp;</span>
                             <input
                                 type="text"
                                 value={input}
