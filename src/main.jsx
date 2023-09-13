@@ -9,8 +9,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <>
           <AppProvider>
+          <div className="appWrapper">
             <ResponsiveAppBar />
             <App />
+          </div>
           </AppProvider>
       </>
 
