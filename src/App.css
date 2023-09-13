@@ -17,7 +17,7 @@ html, body, #root, .App, .App-header {
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  margin-top: 54px;
 }
 
 .App-header {
@@ -39,7 +39,7 @@ html, body, #root, .App, .App-header {
   font-family: 'Courier New', Consolas, Monaco, 'DejaVu Sans Mono', 'Ubuntu Mono', Inconsolata, 'Fira Code', 'Source Code Pro', 'Hack', monospace;
   font-size: 1em;
   color: #00FF00;
-  padding: 16px;
+  padding: 10px;
 }
 
 .text, .command {
@@ -88,6 +88,6 @@ form {
 @media (max-width: 768px) {
   .terminal {
     font-size: 0.8em;
-    padding: 8px;
+    padding: 5px;
   }
 }
