@@ -41,14 +41,20 @@ const fileSystem = {
     ]
 };
 let currentDir = fileSystem;
+let path = "/home";  // Initialize with the root path
 
 function cd(folderName) {
     const target = currentDir.children.find(child => child.name === folderName && child.type === 'folder');
     if (target) {
         currentDir = target;
+        path += '/' + folderName;  // Update the path
     } else {
         return 'No such directory';
     }
+}
+
+function pwd() {
+    return path;  // Return the current path
 }
 
 function ls() {
@@ -95,9 +101,12 @@ function CommandHandler(command) {
             return cat(arg);
         case 'open':
             return open(arg);
+        case 'pwd':
+            return pwd();  // Handle the pwd command
         default:
             return 'Invalid command: ' + command + '\nType help for guidelines.';
     }
 }
+
 
 export default CommandHandler;
