@@ -1,0 +1,68 @@
+.app-bar {
+    background-color: black;
+    padding: 1rem; /* Relative to root font-size */
+}
+
+.terminal-style {
+    font-family: 'Courier New', Consolas, Monaco, 'DejaVu Sans Mono', 'Ubuntu Mono', Inconsolata, 'Fira Code', 'Source Code Pro', 'Hack', monospace;
+    font-size: 1em; /* Relative to parent font-size */
+    color: #00FF00;
+    cursor: pointer;
+}
+
+
+.logo-text {
+    font-size: 1.2em; /* Slightly larger than other text */
+    color: #00FFFF; /* Different color */
+    text-transform: uppercase; /* Uppercase */
+    margin-right: 2%; /* Spacing between LOGO text and menu items */
+    margin-left: 2%
+}
+
+
+.logo-placeholder {
+    flex-shrink: 0;
+    width: 5%; /* Relative to parent width */
+    min-width: 2rem; /* Relative to root font-size */
+    height: 2rem; /* Relative to root font-size */
+    background-color: #333;
+    margin-left: 2%; /* Relative to parent width */
+}
+
+.menu-item {
+    margin: 0 1%; /* Relative to parent width */
+}
+
+.side-tab {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    overflow-x: hidden;
+    background-color: #111;  /* Slightly lighter than the main background */
+    transition: 0.5s;
+    box-shadow: 2px 0px 5px rgba(0, 255, 0, 0.5);  /* Subtle shadow */
+}
+
+
+.side-tab.show {
+    width: 20%; /* Relative to parent width */
+    min-width: 10rem; /* Relative to root font-size */
+}
+
+.side-tab-item {
+    margin: 1rem; /* Relative to root font-size */
+}
+
+
+.side-tab-button-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns child elements to the end of the container */
+    margin: 1rem 0; /* Top and bottom margin */
+}
+
+.side-tab-button {
+    margin: 0 1rem; /* Margin on the right */
+}
+
