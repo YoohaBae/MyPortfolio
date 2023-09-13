@@ -105,6 +105,25 @@ function help() {
         '\n 5. open {index.html} : open a new page of index.html';
 }
 
+
+const funnyComments = [
+    "Nice try, hacker! 😜",
+    "Permission denied! Even sudo can't help you here.",
+    "Nice try, but I can't let you do that, Dave.",
+    "Error 403: Fun detected, but you're not authorized.",
+    "Ah ah ah! You didn't say the magic word!",
+    "File manipulation? On MY portfolio? Think again.",
+    "User tried to be sneaky. It wasn't very effective.",
+    "Initiating self-destruct in 3... 2... 1... Just kidding! But you can't do that.",
+    "Achievement unlocked: 'Unauthorized Action Attempted'."
+];
+
+function getRandomComment() {
+    const randomIndex = Math.floor(Math.random() * funnyComments.length);
+    return funnyComments[randomIndex];
+}
+
+
 function CommandHandler(command, setPath, path, setOutput) {
     const [cmd, arg] = command.split(' ');
 
@@ -124,7 +143,11 @@ function CommandHandler(command, setPath, path, setOutput) {
         case 'clear':
             setOutput([]);  // Clear the output array
             return '';  // Return an empty string or null to avoid adding to output
-
+        case 'rm':
+        case 'mkdir':
+        case 'rmdir':
+        case 'touch':
+            return getRandomComment();
         default:
             return 'Invalid command: ' + command + '\nType help for guidelines.';
     }
